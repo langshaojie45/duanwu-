@@ -263,7 +263,7 @@ h1 {
   position: absolute;
   left: 0;
   right: 0;
-  top: 250px;
+  top: 214px;
   height: 245px;
   z-index: 3;
 }
@@ -292,9 +292,9 @@ h1 {
 
 .boat {
   position: absolute;
-  width: min(292px, 76%);
+  width: min(272px, 72%);
   left: 50%;
-  top: 98px;
+  top: 88px;
   transform: translateX(-50%);
   filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.38));
   animation: boatFloat 3s ease-in-out infinite;
@@ -323,12 +323,12 @@ h1 {
 
 .tap-a {
   left: 24px;
-  top: 112px;
+  top: 102px;
 }
 
 .tap-b {
   right: 25px;
-  top: 118px;
+  top: 106px;
   width: 64px;
   height: 64px;
 }
@@ -339,7 +339,7 @@ h1 {
 
 .tap-c {
   right: 86px;
-  top: 44px;
+  top: 34px;
   width: 58px;
   height: 58px;
 }
@@ -359,17 +359,17 @@ h1 {
 }
 
 .river-one {
-  top: 184px;
+  top: 176px;
 }
 
 .river-two {
-  top: 204px;
+  top: 196px;
   opacity: 0.52;
   animation-delay: -1.5s;
 }
 
 .river-three {
-  top: 224px;
+  top: 216px;
   opacity: 0.3;
   animation-delay: -2.6s;
 }
@@ -412,8 +412,8 @@ h1 {
   align-items: center;
   justify-items: center;
   gap: 8px;
-  min-height: 118px;
-  padding: 16px 18px 18px;
+  min-height: 104px;
+  padding: 14px 18px 16px;
   text-align: center;
   border-radius: 24px;
   background:
@@ -462,7 +462,7 @@ h1 {
   padding: 0;
   text-align: center;
   color: #fff2ad;
-  font-size: clamp(38px, 10.5vw, 46px);
+  font-size: clamp(34px, 9.6vw, 44px);
   line-height: 1.08;
   text-shadow:
     0 0 22px rgba(247, 205, 112, 0.34),
