@@ -3,50 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>端午安康 · 抖音风动态祝福</title>
+    <title>端午安康 · 动态祝福</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="phone-stage" aria-label="端午节动态祝福网页">
       <canvas id="sparkCanvas" aria-hidden="true"></canvas>
 
-      <section class="reel-card">
-        <div class="aurora" aria-hidden="true"></div>
-        <div class="scanline" aria-hidden="true"></div>
-        <div class="status-pill">端午限定祝福</div>
+      <section class="festival-card" data-theme="jade">
+        <div class="silk-bg" aria-hidden="true"></div>
+        <div class="light-ring" aria-hidden="true"></div>
 
-        <div class="danmaku-track" aria-hidden="true">
-          <span>端午安康</span>
-          <span>粽有好运</span>
-          <span>高“粽”平安</span>
-          <span>一键接福</span>
-        </div>
-
-        <header class="hero-copy">
-          <p class="eyebrow">Dragon Boat Festival</p>
-          <h1>粽有好运<br />为你划来</h1>
-          <p class="subline">愿你今日有艾香，有甜粽，有满屏闪闪发光的好消息。</p>
+        <header class="topbar">
+          <span>端午 · 今日限定</span>
+          <div class="top-actions">
+            <button id="themeBtn" class="icon-btn" type="button" aria-label="切换配色">色</button>
+            <button id="danmakuBtn" class="icon-btn active" type="button" aria-label="开关弹幕">弹</button>
+          </div>
         </header>
 
-        <div class="scene" aria-hidden="true">
-          <img class="zongzi zongzi-a" src="./assets/zongzi.svg" alt="" />
-          <img class="zongzi zongzi-b" src="./assets/zongzi.svg" alt="" />
-          <img class="zongzi zongzi-c" src="./assets/zongzi.svg" alt="" />
-          <img class="boat" src="./assets/dragon-boat.svg" alt="" />
-          <div class="wave wave-one"></div>
-          <div class="wave wave-two"></div>
-          <div class="wave wave-three"></div>
+        <div class="danmaku-layer" id="danmakuLayer" aria-hidden="true">
+          <span>平安顺遂</span>
+          <span>粽有好运</span>
+          <span>一举高粽</span>
+          <span>喜乐安康</span>
         </div>
 
-        <section class="wish-panel" aria-live="polite">
-          <span class="wish-label">今日祝福</span>
-          <p id="wishText">愿你万事顺意，生活像甜粽一样，拆开都是惊喜。</p>
+        <section class="hero">
+          <p class="eyebrow">Dragon Boat Festival</p>
+          <h1>端午安康</h1>
+          <p class="hero-line"><span id="recipientName">你</span>，愿今夏的风把好运都吹到你身边。</p>
         </section>
 
-        <div class="actions">
-          <button id="launchBtn" class="primary-btn" type="button">开船送福</button>
-          <button id="copyBtn" class="ghost-btn" type="button">复制祝福</button>
-        </div>
+        <section class="river-scene" aria-label="端午动态场景">
+          <button class="tap-zongzi tap-a" type="button" data-charm="甜粽" aria-label="拆开甜粽祝福">
+            <img src="./assets/zongzi.svg" alt="" />
+          </button>
+          <button class="tap-zongzi tap-b" type="button" data-charm="艾草" aria-label="领取艾草祝福">
+            <img src="./assets/zongzi.svg" alt="" />
+          </button>
+          <button class="tap-zongzi tap-c" type="button" data-charm="龙舟" aria-label="开启龙舟祝福">
+            <img src="./assets/zongzi.svg" alt="" />
+          </button>
+          <img class="boat" src="./assets/dragon-boat.svg" alt="" />
+          <div class="moon"></div>
+          <div class="river river-one"></div>
+          <div class="river river-two"></div>
+          <div class="river river-three"></div>
+        </section>
+
+        <section class="control-deck">
+          <label class="name-field" for="nameInput">
+            <span>写给谁</span>
+            <input id="nameInput" type="text" maxlength="8" placeholder="输入名字" autocomplete="off" />
+          </label>
+
+          <div class="mode-tabs" aria-label="祝福风格">
+            <button class="mode-tab active" type="button" data-mode="sweet">甜一点</button>
+            <button class="mode-tab" type="button" data-mode="lucky">好运签</button>
+            <button class="mode-tab" type="button" data-mode="bold">燃一点</button>
+          </div>
+
+          <article class="wish-card" aria-live="polite">
+            <span id="fortuneTag">今日福签</span>
+            <p id="wishText">愿你万事顺意，生活像甜粽一样，拆开都是惊喜。</p>
+          </article>
+
+          <div class="action-grid">
+            <button id="launchBtn" class="primary-btn" type="button">生成祝福</button>
+            <button id="fortuneBtn" class="secondary-btn" type="button">抽好运签</button>
+            <button id="copyBtn" class="secondary-btn wide" type="button">复制分享文案</button>
+          </div>
+        </section>
 
         <div id="toast" class="toast" role="status" aria-live="polite">祝福已复制</div>
       </section>
