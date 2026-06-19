@@ -394,10 +394,10 @@ h1 {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 10px;
-  min-height: 42px;
-  padding: 0 12px;
-  border-radius: 14px;
+  gap: 12px;
+  min-height: 58px;
+  padding: 0 16px;
+  border-radius: 18px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
@@ -409,8 +409,9 @@ h1 {
 
 .name-field span {
   color: var(--gold);
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 900;
+  text-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
 }
 
 .name-field input {
@@ -420,8 +421,9 @@ h1 {
   outline: 0;
   color: var(--ink);
   background: transparent;
-  font-size: 15px;
-  font-weight: 800;
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: 0;
 }
 
 .name-field input::placeholder {
@@ -431,6 +433,9 @@ h1 {
 .name-field input:read-only {
   cursor: default;
   color: #fff7c7;
+  text-shadow:
+    0 0 18px rgba(247, 205, 112, 0.24),
+    0 10px 24px rgba(0, 0, 0, 0.36);
 }
 
 .mode-tabs {
