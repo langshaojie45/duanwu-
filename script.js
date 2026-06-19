@@ -138,16 +138,20 @@ function createBurst(origin = "center") {
   const rect = card.getBoundingClientRect();
   const x = origin === "top" ? rect.left + rect.width * 0.5 : rect.left + rect.width * 0.5;
   const y = origin === "top" ? rect.top + rect.height * 0.28 : rect.top + rect.height * 0.52;
+  createPointBurst(x, y, 110, 1);
+}
+
+function createPointBurst(x, y, count = 42, power = 0.62) {
   const colors = ["#f7cd70", "#17c78d", "#3dd8f5", "#e94b5f", "#fff8e8"];
 
-  for (let i = 0; i < 110; i += 1) {
+  for (let i = 0; i < count; i += 1) {
     particles.push({
       x,
       y,
-      vx: randomBetween(-5.6, 5.6),
-      vy: randomBetween(-8.2, 2.2),
+      vx: randomBetween(-5.6, 5.6) * power,
+      vy: randomBetween(-8.2, 2.2) * power,
       size: randomBetween(3, 8),
-      life: randomBetween(44, 82),
+      life: randomBetween(34, 68),
       maxLife: 82,
       color: colors[Math.floor(Math.random() * colors.length)],
       spin: randomBetween(-0.22, 0.22),
@@ -202,6 +206,11 @@ function showToast(message) {
   toast.classList.add("show");
   window.setTimeout(() => toast.classList.remove("show"), 1400);
 }
+
+card.addEventListener("pointerdown", (event) => {
+  if (!event.isPrimary || event.target.closest("input, textarea, select")) return;
+  createPointBurst(event.clientX, event.clientY, 34, 0.58);
+});
 
 modeTabs.forEach((tab) => {
   tab.addEventListener("click", () => {
