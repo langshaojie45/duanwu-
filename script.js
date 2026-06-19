@@ -36,6 +36,7 @@ const copyBtn = document.querySelector("#copyBtn");
 const themeBtn = document.querySelector("#themeBtn");
 const danmakuBtn = document.querySelector("#danmakuBtn");
 const danmakuLayer = document.querySelector("#danmakuLayer");
+const nameField = document.querySelector(".name-field");
 const toast = document.querySelector("#toast");
 const modeTabs = [...document.querySelectorAll(".mode-tab")];
 const charmButtons = [...document.querySelectorAll(".tap-zongzi")];
@@ -45,6 +46,38 @@ let previousWish = -1;
 let particles = [];
 let theme = "jade";
 let danmakuOn = true;
+
+function cleanName(value) {
+  return value.trim().replace(/\s+/g, "").slice(0, 8);
+}
+
+function updateShareUrl() {
+  const url = new URL(window.location.href);
+  const name = cleanName(nameInput.value);
+  if (name) {
+    url.searchParams.set("to", name);
+    url.searchParams.set("lock", "1");
+  } else {
+    url.searchParams.delete("to");
+    url.searchParams.delete("lock");
+  }
+  window.history.replaceState({}, "", url);
+  return url.toString();
+}
+
+function hydrateFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const name = cleanName(params.get("to") || "");
+  if (!name) return;
+  nameInput.value = name;
+  recipientName.textContent = name;
+  setWish(wishBank.sweet[0], "专属祝福");
+  if (params.get("lock") === "1") {
+    nameInput.readOnly = true;
+    nameInput.setAttribute("aria-readonly", "true");
+    nameField.classList.add("is-locked");
+  }
+}
 
 function sizeCanvas() {
   canvas.width = window.innerWidth * window.devicePixelRatio;
@@ -57,7 +90,7 @@ function randomBetween(min, max) {
 }
 
 function displayName() {
-  return nameInput.value.trim() || "你";
+  return cleanName(nameInput.value) || "你";
 }
 
 function decorateWish(text) {
@@ -168,7 +201,9 @@ charmButtons.forEach((button) => {
 });
 
 nameInput.addEventListener("input", () => {
+  if (nameInput.readOnly) return;
   recipientName.textContent = displayName();
+  updateShareUrl();
 });
 
 launchBtn.addEventListener("click", () => {
@@ -186,10 +221,11 @@ fortuneBtn.addEventListener("click", () => {
 });
 
 copyBtn.addEventListener("click", async () => {
-  const text = `端午安康！${wishText.textContent} ${location.href}`;
+  const shareUrl = updateShareUrl();
+  const text = `端午安康！${wishText.textContent} ${shareUrl}`;
   try {
     if (navigator.share) {
-      await navigator.share({ title: "端午安康", text, url: location.href });
+      await navigator.share({ title: "端午安康", text, url: shareUrl });
       showToast("分享面板已打开");
       return;
     }
@@ -219,4 +255,5 @@ danmakuBtn.addEventListener("click", () => {
 
 window.addEventListener("resize", sizeCanvas);
 sizeCanvas();
+hydrateFromUrl();
 drawParticles();

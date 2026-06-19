@@ -259,7 +259,7 @@ h1 {
   position: absolute;
   left: 0;
   right: 0;
-  top: 282px;
+  top: 250px;
   height: 245px;
   z-index: 3;
 }
@@ -267,7 +267,7 @@ h1 {
 .moon {
   position: absolute;
   left: 42px;
-  top: 28px;
+  top: 34px;
   width: 46px;
   height: 46px;
   border-radius: 50%;
@@ -288,12 +288,13 @@ h1 {
 
 .boat {
   position: absolute;
-  width: min(306px, 78%);
+  width: min(292px, 76%);
   left: 50%;
-  top: 94px;
+  top: 98px;
   transform: translateX(-50%);
   filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.38));
   animation: boatFloat 3s ease-in-out infinite;
+  z-index: 4;
 }
 
 .tap-zongzi {
@@ -318,12 +319,12 @@ h1 {
 
 .tap-a {
   left: 24px;
-  top: 104px;
+  top: 112px;
 }
 
 .tap-b {
   right: 25px;
-  top: 110px;
+  top: 118px;
   width: 64px;
   height: 64px;
 }
@@ -334,7 +335,7 @@ h1 {
 
 .tap-c {
   right: 86px;
-  top: 30px;
+  top: 44px;
   width: 58px;
   height: 58px;
 }
@@ -354,17 +355,17 @@ h1 {
 }
 
 .river-one {
-  top: 194px;
+  top: 184px;
 }
 
 .river-two {
-  top: 214px;
+  top: 204px;
   opacity: 0.52;
   animation-delay: -1.5s;
 }
 
 .river-three {
-  top: 234px;
+  top: 224px;
   opacity: 0.3;
   animation-delay: -2.6s;
 }
@@ -387,7 +388,7 @@ h1 {
 
 .name-field {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 10px;
   min-height: 42px;
@@ -395,6 +396,11 @@ h1 {
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.name-field.is-locked {
+  background: rgba(247, 205, 112, 0.12);
+  border-color: rgba(247, 205, 112, 0.36);
 }
 
 .name-field span {
@@ -416,6 +422,26 @@ h1 {
 
 .name-field input::placeholder {
   color: rgba(255, 248, 232, 0.42);
+}
+
+.name-field input:read-only {
+  cursor: default;
+}
+
+#lockBadge {
+  display: none;
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: #061917;
+  background: linear-gradient(90deg, var(--gold), #fff1b8);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.name-field.is-locked #lockBadge {
+  display: inline-block;
 }
 
 .mode-tabs {
@@ -622,7 +648,7 @@ h1 {
   }
 
   .river-scene {
-    top: 254px;
+    top: 226px;
     transform: scale(0.94);
     transform-origin: top center;
   }
