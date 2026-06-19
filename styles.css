@@ -418,14 +418,15 @@ h1 {
 }
 
 .festival-card.is-receiver .name-field {
-  grid-template-columns: 1fr;
+  grid-template-columns: auto minmax(0, auto);
   align-items: center;
   justify-items: center;
-  gap: 8px;
-  min-height: 94px;
-  padding: 12px 18px 14px;
-  text-align: center;
-  border-radius: 24px;
+  justify-content: center;
+  gap: 14px;
+  min-height: 78px;
+  padding: 12px 20px;
+  text-align: left;
+  border-radius: 22px;
   background:
     radial-gradient(circle at 50% 0%, rgba(255, 241, 184, 0.2), transparent 52%),
     linear-gradient(135deg, rgba(247, 205, 112, 0.18), rgba(255, 248, 232, 0.04) 48%, rgba(23, 199, 141, 0.11)),
@@ -445,13 +446,14 @@ h1 {
 .festival-card.is-receiver .name-field span {
   display: inline-grid;
   place-items: center;
-  min-height: 26px;
-  padding: 0 12px;
+  min-height: 36px;
+  padding: 0 16px;
   border-radius: 999px;
   color: #08221a;
   background: linear-gradient(90deg, var(--gold), #fff3bc);
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1;
+  white-space: nowrap;
   box-shadow: 0 8px 20px rgba(247, 205, 112, 0.18);
 }
 
@@ -470,9 +472,9 @@ h1 {
 .festival-card.is-receiver .name-field input {
   height: auto;
   padding: 0;
-  text-align: center;
+  text-align: left;
   color: #fff2ad;
-  font-size: clamp(34px, 9.6vw, 44px);
+  font-size: clamp(32px, 8.7vw, 42px);
   line-height: 1.08;
   text-shadow:
     0 0 22px rgba(247, 205, 112, 0.34),
@@ -658,13 +660,13 @@ h1 {
 
 .fortune-stick {
   position: relative;
-  width: 72px;
-  min-height: 218px;
+  width: 118px;
+  min-height: 318px;
   display: grid;
   place-items: center;
-  padding: 22px 12px;
-  border-radius: 999px;
-  transform: translateY(-86px);
+  padding: 28px 16px;
+  border-radius: 34px;
+  transform: translateY(-168px);
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.16), transparent 22%, transparent 78%, rgba(0, 0, 0, 0.2)),
     linear-gradient(180deg, #e83b42, #a20f2b 58%, #7c0e24);
@@ -686,7 +688,7 @@ h1 {
   content: "";
   position: absolute;
   left: 50%;
-  width: 42px;
+  width: 76px;
   height: 8px;
   border-radius: 999px;
   transform: translateX(-50%);
@@ -703,10 +705,11 @@ h1 {
 
 #fortuneStickText {
   color: #fff3bc;
-  font-size: 19px;
+  max-height: 250px;
+  font-size: 18px;
   font-weight: 900;
   letter-spacing: 2px;
-  line-height: 1.24;
+  line-height: 1.48;
   writing-mode: vertical-rl;
   text-orientation: upright;
   text-shadow:
@@ -830,11 +833,11 @@ h1 {
 @keyframes fortuneStickBeat {
   0%,
   100% {
-    transform: translateY(-86px) scale(1);
+    transform: translateY(-168px) scale(1);
     filter: brightness(1);
   }
   50% {
-    transform: translateY(-88px) scale(1.018);
+    transform: translateY(-170px) scale(1.018);
     filter: brightness(1.12);
   }
 }

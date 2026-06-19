@@ -151,9 +151,8 @@ function makeFortuneStickText(text) {
   const name = displayName();
   const core = text
     .replace(/^今日福签：/, "")
-    .replace(/[，。,.！!：:、；;]/g, "")
-    .slice(0, 8);
-  return name === "你" ? core : `${name}${core}`.slice(0, 10);
+    .replace(/[，。,.！!：:、；;]/g, "");
+  return name === "你" ? core : `${name}${core}`;
 }
 
 function createBurst(origin = "center") {
