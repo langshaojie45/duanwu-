@@ -30,6 +30,8 @@ const wishText = document.querySelector("#wishText");
 const fortuneTag = document.querySelector("#fortuneTag");
 const nameInput = document.querySelector("#nameInput");
 const recipientName = document.querySelector("#recipientName");
+const modeLabel = document.querySelector("#modeLabel");
+const nameLabel = document.querySelector("#nameLabel");
 const launchBtn = document.querySelector("#launchBtn");
 const fortuneBtn = document.querySelector("#fortuneBtn");
 const copyBtn = document.querySelector("#copyBtn");
@@ -51,7 +53,20 @@ function cleanName(value) {
   return value.trim().replace(/\s+/g, "").slice(0, 8);
 }
 
-function updateShareUrl() {
+function syncDraftUrl() {
+  const url = new URL(window.location.href);
+  const name = cleanName(nameInput.value);
+  if (name) {
+    url.searchParams.set("to", name);
+  } else {
+    url.searchParams.delete("to");
+  }
+  url.searchParams.delete("lock");
+  window.history.replaceState({}, "", url);
+  return url.toString();
+}
+
+function buildLockedShareUrl() {
   const url = new URL(window.location.href);
   const name = cleanName(nameInput.value);
   if (name) {
@@ -61,7 +76,6 @@ function updateShareUrl() {
     url.searchParams.delete("to");
     url.searchParams.delete("lock");
   }
-  window.history.replaceState({}, "", url);
   return url.toString();
 }
 
@@ -75,7 +89,14 @@ function hydrateFromUrl() {
   if (params.get("lock") === "1") {
     nameInput.readOnly = true;
     nameInput.setAttribute("aria-readonly", "true");
+    card.classList.add("is-receiver");
     nameField.classList.add("is-locked");
+    modeLabel.textContent = "端午 · 专属祝福";
+    nameLabel.textContent = "送给";
+    copyBtn.textContent = "复制这份祝福";
+  } else {
+    modeLabel.textContent = "端午 · 制作祝福";
+    nameLabel.textContent = "写给谁";
   }
 }
 
@@ -203,7 +224,7 @@ charmButtons.forEach((button) => {
 nameInput.addEventListener("input", () => {
   if (nameInput.readOnly) return;
   recipientName.textContent = displayName();
-  updateShareUrl();
+  syncDraftUrl();
 });
 
 launchBtn.addEventListener("click", () => {
@@ -221,7 +242,7 @@ fortuneBtn.addEventListener("click", () => {
 });
 
 copyBtn.addEventListener("click", async () => {
-  const shareUrl = updateShareUrl();
+  const shareUrl = buildLockedShareUrl();
   const text = `端午安康！${wishText.textContent} ${shareUrl}`;
   try {
     if (navigator.share) {

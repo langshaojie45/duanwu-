@@ -84,6 +84,10 @@ button {
   --blue: #6ee7ff;
 }
 
+.festival-card.is-receiver .top-actions {
+  opacity: 0.72;
+}
+
 .silk-bg {
   position: absolute;
   inset: -10%;
@@ -426,6 +430,7 @@ h1 {
 
 .name-field input:read-only {
   cursor: default;
+  color: #fff7c7;
 }
 
 #lockBadge {
