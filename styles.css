@@ -433,22 +433,6 @@ h1 {
   color: #fff7c7;
 }
 
-#lockBadge {
-  display: none;
-  padding: 4px 8px;
-  border-radius: 999px;
-  color: #061917;
-  background: linear-gradient(90deg, var(--gold), #fff1b8);
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 900;
-  white-space: nowrap;
-}
-
-.name-field.is-locked #lockBadge {
-  display: inline-block;
-}
-
 .mode-tabs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
