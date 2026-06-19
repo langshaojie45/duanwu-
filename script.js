@@ -93,7 +93,6 @@ function hydrateFromUrl() {
     nameField.classList.add("is-locked");
     modeLabel.textContent = "端午 · 专属祝福";
     nameLabel.textContent = "送给";
-    copyBtn.textContent = "复制这份祝福";
   } else {
     modeLabel.textContent = "端午 · 制作祝福";
     nameLabel.textContent = "写给谁";
