@@ -39,6 +39,8 @@ const themeBtn = document.querySelector("#themeBtn");
 const danmakuBtn = document.querySelector("#danmakuBtn");
 const danmakuLayer = document.querySelector("#danmakuLayer");
 const nameField = document.querySelector(".name-field");
+const fortuneReveal = document.querySelector("#fortuneReveal");
+const fortuneStickText = document.querySelector("#fortuneStickText");
 const toast = document.querySelector("#toast");
 const modeTabs = [...document.querySelectorAll(".mode-tab")];
 const charmButtons = [...document.querySelectorAll(".tap-zongzi")];
@@ -48,6 +50,8 @@ let previousWish = -1;
 let particles = [];
 let theme = "jade";
 let danmakuOn = true;
+let fortuneRevealTimer = null;
+let fortuneHideTimer = null;
 
 function cleanName(value) {
   return value.trim().replace(/\s+/g, "").slice(0, 8);
@@ -133,6 +137,25 @@ function nextWish(forceMode = mode) {
   setWish(bank[index], fortuneTags[Math.floor(Math.random() * fortuneTags.length)]);
 }
 
+function pickWish(forceMode = mode) {
+  const bank = wishBank[forceMode];
+  let index = Math.floor(Math.random() * bank.length);
+  if (index === previousWish) {
+    index = (index + 1) % bank.length;
+  }
+  previousWish = index;
+  return bank[index];
+}
+
+function makeFortuneStickText(text) {
+  const name = displayName();
+  const core = text
+    .replace(/^今日福签：/, "")
+    .replace(/[，。,.！!：:、；;]/g, "")
+    .slice(0, 11);
+  return name === "你" ? core : `${name}${core}`.slice(0, 13);
+}
+
 function createBurst(origin = "center") {
   const rect = card.getBoundingClientRect();
   const x = origin === "top" ? rect.left + rect.width * 0.5 : rect.left + rect.width * 0.5;
@@ -206,6 +229,21 @@ function showToast(message) {
   window.setTimeout(() => toast.classList.remove("show"), 1400);
 }
 
+function showFortuneReveal(text) {
+  fortuneStickText.textContent = makeFortuneStickText(text);
+  window.clearTimeout(fortuneRevealTimer);
+  window.clearTimeout(fortuneHideTimer);
+  fortuneReveal.classList.remove("show", "hide");
+  void fortuneReveal.offsetWidth;
+  fortuneReveal.classList.add("show");
+  fortuneRevealTimer = window.setTimeout(() => {
+    fortuneReveal.classList.add("hide");
+    fortuneHideTimer = window.setTimeout(() => {
+      fortuneReveal.classList.remove("show", "hide");
+    }, 480);
+  }, 7000);
+}
+
 card.addEventListener("pointerdown", (event) => {
   if (!event.isPrimary || event.target.closest("input, textarea, select")) return;
   createPointBurst(event.clientX, event.clientY, 34, 0.58);
@@ -244,9 +282,19 @@ launchBtn.addEventListener("click", () => {
 fortuneBtn.addEventListener("click", () => {
   mode = "lucky";
   modeTabs.forEach((item) => item.classList.toggle("active", item.dataset.mode === mode));
-  nextWish(mode);
-  addDanmaku("好运签");
-  popCard("top");
+  fortuneBtn.disabled = true;
+  fortuneBtn.classList.add("is-drawing");
+  fortuneBtn.textContent = "抽签中";
+  window.setTimeout(() => {
+    const text = pickWish(mode);
+    setWish(text, "上上签");
+    showFortuneReveal(text);
+    addDanmaku("上上签");
+    popCard("top");
+    fortuneBtn.textContent = "再抽一签";
+    fortuneBtn.classList.remove("is-drawing");
+    fortuneBtn.disabled = false;
+  }, 520);
 });
 
 copyBtn.addEventListener("click", async () => {
