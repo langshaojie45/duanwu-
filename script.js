@@ -17,6 +17,13 @@ const wishBank = {
 };
 
 const fortuneTags = ["今日福签", "端午彩蛋", "好运到账", "高粽时刻"];
+const fortuneStickPhrases = [
+  "心愿上上签适合出发",
+  "好运正靠岸一路顺风",
+  "龙舟载喜讯平安到岸",
+  "贵人同行好事将近",
+  "清风送甜意万事顺遂"
+];
 const charms = {
   "甜粽": "你拆到一枚甜粽：今天适合被偏爱，也适合把快乐说出口。",
   "艾草": "你领取一束艾草：替你挡住坏心情，留下清爽和平安。",
@@ -148,11 +155,8 @@ function pickWish(forceMode = mode) {
 }
 
 function makeFortuneStickText(text) {
-  const name = displayName();
-  const core = text
-    .replace(/^今日福签：/, "")
-    .replace(/[，。,.！!：:、；;]/g, "");
-  return name === "你" ? core : `${name}${core}`;
+  const index = Math.abs(text.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0)) % fortuneStickPhrases.length;
+  return fortuneStickPhrases[index];
 }
 
 function createBurst(origin = "center") {
