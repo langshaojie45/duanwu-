@@ -659,12 +659,12 @@ h1 {
 .fortune-stick {
   position: relative;
   width: 72px;
-  min-height: 238px;
+  min-height: 218px;
   display: grid;
   place-items: center;
   padding: 22px 12px;
   border-radius: 999px;
-  transform: translateY(-26px);
+  transform: translateY(-86px);
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.16), transparent 22%, transparent 78%, rgba(0, 0, 0, 0.2)),
     linear-gradient(180deg, #e83b42, #a20f2b 58%, #7c0e24);
@@ -703,10 +703,10 @@ h1 {
 
 #fortuneStickText {
   color: #fff3bc;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 900;
-  letter-spacing: 0;
-  line-height: 1.15;
+  letter-spacing: 2px;
+  line-height: 1.24;
   writing-mode: vertical-rl;
   text-orientation: upright;
   text-shadow:
@@ -830,11 +830,11 @@ h1 {
 @keyframes fortuneStickBeat {
   0%,
   100% {
-    transform: translateY(-26px) scale(1);
+    transform: translateY(-86px) scale(1);
     filter: brightness(1);
   }
   50% {
-    transform: translateY(-28px) scale(1.018);
+    transform: translateY(-88px) scale(1.018);
     filter: brightness(1.12);
   }
 }

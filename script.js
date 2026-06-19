@@ -152,8 +152,8 @@ function makeFortuneStickText(text) {
   const core = text
     .replace(/^今日福签：/, "")
     .replace(/[，。,.！!：:、；;]/g, "")
-    .slice(0, 11);
-  return name === "你" ? core : `${name}${core}`.slice(0, 13);
+    .slice(0, 8);
+  return name === "你" ? core : `${name}${core}`.slice(0, 10);
 }
 
 function createBurst(origin = "center") {
@@ -241,7 +241,7 @@ function showFortuneReveal(text) {
     fortuneHideTimer = window.setTimeout(() => {
       fortuneReveal.classList.remove("show", "hide");
     }, 480);
-  }, 7000);
+  }, 5000);
 }
 
 card.addEventListener("pointerdown", (event) => {
